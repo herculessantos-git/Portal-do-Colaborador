@@ -1,0 +1,132 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ==========================================================================
+   NEXIFY DESIGN TOKENS
+   Fonte única de verdade de cor, para shadcn/ui e para o restante do app.
+   Valores em HSL "cru" (sem hsl()) — padrão exigido pelo Tailwind quando o
+   token é consumido como hsl(var(--x)) no tailwind.config.js.
+   Ver docs/design-tokens.json para a versão primitiva + mapeamento em hex.
+   ========================================================================== */
+@layer base {
+  :root {
+    /* --- Superfícies --- */
+    --background: 210 37% 97%; /* #F4F7FA — bg-light */
+    --foreground: 213 33% 21%; /* #243447 — text-primary */
+    --card: 0 0% 100%; /* #FFFFFF — surface */
+    --card-foreground: 213 33% 21%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 213 33% 21%;
+
+    /* --- Marca --- */
+    --primary: 207 76% 38%; /* #1769AA */
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 206 78% 33%; /* #125C94 */
+    --secondary: 206 50% 95%; /* #EAF2F8 — tint claro do primary */
+    --secondary-foreground: 207 76% 38%;
+    --accent: 206 53% 94%; /* hover/seleção sutil */
+    --accent-foreground: 207 76% 38%;
+
+    /* --- Neutros --- */
+    --muted: 210 31% 95%; /* #EEF2F6 */
+    --muted-foreground: 207 19% 44%; /* #5A7184 — text-secondary */
+    --border: 212 24% 89%; /* #DDE3EA */
+    --input: 212 24% 89%;
+    --ring: 207 76% 38%;
+
+    /* --- Semânticas (feedback) --- */
+    --destructive: 0 76% 53%; /* #E32D2D */
+    --destructive-foreground: 0 0% 100%;
+    --success: 158 74% 38%; /* #19A974 */
+    --success-foreground: 0 0% 100%;
+    --warning: 37 91% 55%; /* #F5A623 */
+    --warning-foreground: 213 33% 21%;
+    --info: 201 98% 41%; /* #0288D1 */
+    --info-foreground: 0 0% 100%;
+
+    /* --- Marca fixa (não muda entre temas: sidebar, acentos) --- */
+    --navy: 209 61% 16%; /* #102A43 */
+    --cyan: 185 72% 45%; /* #20B8C5 */
+    --cyan-foreground: 209 61% 16%;
+
+    /* --- Forma --- */
+    --radius: 0.625rem; /* 10px — radius-md */
+
+    /* --- Sombras (não-HSL; expostas como variáveis simples) --- */
+    --shadow-color: 220 43% 11%;
+  }
+
+  .dark {
+    --background: 211 53% 11%; /* #0D1B2A */
+    --foreground: 208 48% 94%; /* #E8F0F7 */
+    --card: 214 42% 15%; /* #162436 */
+    --card-foreground: 208 48% 94%;
+    --popover: 213 41% 20%; /* #1E3148 */
+    --popover-foreground: 208 48% 94%;
+
+    --primary: 206 62% 53%; /* #3B8FD1 — clareado p/ contraste em fundo escuro */
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 206 65% 48%; /* #2B84C9 */
+    --secondary: 213 41% 20%; /* #1E3148 */
+    --secondary-foreground: 208 48% 94%;
+    --accent: 213 33% 21%; /* #243447 */
+    --accent-foreground: 208 48% 94%;
+
+    --muted: 213 41% 20%;
+    --muted-foreground: 201 26% 64%; /* #8AAABB */
+    --border: 213 33% 21%; /* #243447 */
+    --input: 213 33% 21%;
+    --ring: 185 72% 45%; /* cyan no dark — mais contraste que o primary */
+
+    --destructive: 0 84% 63%; /* #F05252 — clareado */
+    --destructive-foreground: 211 53% 11%;
+    --success: 161 66% 50%; /* #2DD4A0 — clareado */
+    --success-foreground: 211 53% 11%;
+    --warning: 37 91% 65%; /* #F7B955 — clareado */
+    --warning-foreground: 211 53% 11%;
+    --info: 201 76% 56%; /* #38A9E4 — clareado */
+    --info-foreground: 211 53% 11%;
+
+    --navy: 209 61% 16%;
+    --cyan: 185 68% 50%; /* #2BC9D6 */
+    --cyan-foreground: 211 53% 11%;
+
+    --shadow-color: 0 0% 0%;
+  }
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans text-base transition-colors duration-200 m-0;
+  }
+
+  /* Foco visível consistente para todo elemento interativo — teclado precisa
+     de um "figure" claro contra o "ground" da página (Gestalt: figura-fundo). */
+  :focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+}
+
+@layer utilities {
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--border));
+    border-radius: 9999px;
+  }
+}
